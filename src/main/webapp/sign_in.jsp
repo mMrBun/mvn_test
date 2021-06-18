@@ -22,68 +22,38 @@
 
     </div>
 </div>
-<%--<div class="content">
-    <div class="login_box">
-        <div class="login_info">
-            <label for="">手机号码</label>
-            <select name="" id="tel_select">
-                <option value="中国大陆+86">中国大陆+86</option>
-                <option value="中国台湾+886">中国大陆+86</option>
-                <option value="中国香港+852">中国大陆+86</option>
-            </select>
-            <input id="tel" type="text" placeholder="会员名/邮箱/手机号">
-        </div>
 
-        <div class="login_info">
-            <label for="">验证码</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" style="width: 190px;border-right: none;" placeholder="请输入验证码">
-            <div class="code">
-                <a href="">获取验证码</a>
-            </div>
-
-        </div>
-        <div class="login_submit">
-            <input id="btn_signin" type="button" value="注册">
-        </div>
-        <div class="login_problem">
-            <input type="checkbox" name="" id="">
-            <span>
-                    已阅读并同意以下协议淘宝平台服务协议、隐私权政策、
-                </span>
-            <p>
-                法律声明支付宝及客户端服务协议
-            </p>
-        </div>
-    </div>
-
-</div>--%>
 <div class="content">
-    <div class="login_box">
-        <div class="login_name">
-            <label for="name">账号：</label>
-            <input class="input" type="text" name="name" id="name" value="" />
-        </div>
-        <div class="login_pwd">
-            <label for="pawd">密码：</label>
-            <input class="input" type="password" name="pawd" id="pawd" value="" />
-        </div>
-        <div class="login_nickName">
-            <label for="nickName">昵称：</label>
-            <input class="input" type="text" name="nickName" id="nickName" value="" />
-        </div>
-        <div class="login_submit">
-            <input id="btn_signin" type="button" value="注册">
-        </div>
-        <div class="login_problem">
-            <input type="checkbox" name="" id="">
-            <span>
+    <form action="signIn" id="sign_in" method="post">
+        <div class="login_box">
+            <div class="login_name">
+                <label for="name">手机号:</label>
+                <input class="input" type="text" name="name" id="name" value="" /></br>
+                <span style="color: red">${messageModel.msg}</span>
+            </div>
+            <div class="login_pwd">
+                <label for="pawd">密码：</label>
+                <input class="input" type="password" name="pawd" id="pawd" value="" />
+            </div>
+            <div class="login_nickName">
+                <label for="nickName">昵称：</label>
+                <input class="input" type="text" name="nickName" id="nickName" value="" />
+            </div>
+            <div class="login_submit">
+                <input id="btn_signin" type="button" value="注册">
+            </div>
+            <div class="login_problem">
+                <input type="checkbox" name="" id="">
+                <span>
 						已阅读并同意以下协议淘宝平台服务协议、隐私权政策、
 					</span>
-            <p>
-                法律声明支付宝及客户端服务协议
-            </p>
+                <p>
+                    法律声明支付宝及客户端服务协议
+                </p>
+            </div>
         </div>
-    </div>
+    </form>
+
 </div>
 
 <div class="footer">
@@ -154,62 +124,6 @@
 </div>
 </body>
 <script src="js/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/FileSaver.js/1.3.8/FileSaver.js"></script>
-<script>
-    $("#btn_signin").click(function () {
-        if (checkEmpty()) {
-            exits();
-        }
-    });
-    /**************************************************************/
-    //手机号合法性验证
-    function checkEmpty() {
-        var pattern = /^1[34578]\d{9}$/;
-        if ($("#tel").val() == "") {
-            alert("请输入手机号");
-            return;
-        } else if (!pattern.test($("#tel").val())) {
-            alert("手机格式不正确");
-            return;
-        }
-        return true;
-    }
+<script src="js/sign_in.js"></script>
 
-    /**************************************************************/
-    /**************************************************************/
-    //判断当前注册的用户是否已经存在，如果存在注册失败，如果不存在调用FileSaver.js脚本进行账户的存储
-    function exits() {
-        var flag = true;
-        $.ajax({
-            type: "GET",
-            url: "./save.json",
-            dataType: "json",
-            success: function (data) {
-                var val = data["user"];
-                for (var i = 0; i < val.length; i++) {
-                    var name = val[i]["name"];
-                    if (name == $("#tel").val()) {
-                        alert("该用户已被注册");
-                        flag = false;
-                        return;
-                    }
-                }
-                if (flag) {
-                    let data = {
-                        name: $("#tel").val(),
-                    }
-                    var content = JSON.stringify(data);
-                    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-                    saveAs(blob, "save.json");
-                    window.location.href = "index.jsp";
-                }
-
-            }
-        });
-        /**************************************************************/
-
-    }
-
-
-</script>
 </html>

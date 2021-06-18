@@ -27,7 +27,7 @@
                     <a href="javascript:;" class="arrow">中国大陆</a>
                 </li>
                 <li class="orange">
-                    <a href="login.jsp" id="cus_name">欢迎${customer.name}登录</a>
+                    <a id="c_name" href="javascript:;">欢迎${customer.name}登录</a>
                 </li>
                 <li>
                     <a href="sign_in.jsp">免费注册</a>
@@ -76,8 +76,8 @@
                     <a href="javascript:;">店铺</a>
                 </ul>
                 <form class="search-input">
-                    <input class="box1" type="text" name="search">
-                    <button class="btn" type="submit">搜索</button>
+                    <input class="box1" id="search" type="text" name="search">
+                    <button class="btn" id="search_btn" type="button">搜索</button>
                 </form>
 
                 <div class="search-choose">
@@ -176,117 +176,6 @@
 </div>
 </body>
 <script src="js/jquery.min.js"></script>
-<script>
-    var m_id;
-    var name;
-    var m_count;
-    $(function () {
-        var url = decodeURI(location.href);
-        var val = parseURL(url);
-        $("#img_src").attr("src",val.source);
-        $("#commodity_dis").text(val.title);
-        $("#price_dis").text(val.price);
-        m_id=val.id;
-        name=$("#cus_name").text().substring(2,$("#cus_name").text().length-2);
-
-    });
-    $(".btn-add").click(function () {
-        m_count=$("#mer_count").val();
-        var xhr=new XMLHttpRequest();
-        xhr.open("post","addCart");
-        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
-        xhr.send("name="+name+"&m_id="+m_id+"&m_count="+m_count);
-        xhr.onreadystatechange=function () {
-            if(xhr.readyState==4 && xhr.status==200)
-            {
-                messagePop("加入购物车成功");
-            }
-        }
-    });
-
-    /********************************************************/
-    //商品数量计算函数
-    function calculateUpdate(kind) {
-        var tn = document.ticketNumber;
-        var c = tn.amount.value;
-        if (kind == "jia") {
-            c++;
-        }
-        else if (kind == "jian") {
-            if (c > 1) c--;
-        }
-        tn.amount.value = c;
-    }
-    /**************************************************************/
-    function parseURL(url) {
-        var url = url.split("?")[1];
-        if (url != null) {
-            var para = url.split("&");
-            var len = para.length;
-            var res = {};
-            var arr = [];
-            for (var i = 0; i < len; i++) {
-                arr = para[i].split("=");
-                res[arr[0]] = arr[1];
-            }
-        }
-
-        return res;
-    }
-    $("#load_cart").click(function (){
-        var name=$("#cus_name").text().substring(2,$("#cus_name").text().length-2);
-        var xhr=new XMLHttpRequest();
-        xhr.open("post","loadCart",false);
-        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
-        xhr.send("name="+name);
-        xhr.onreadystatechange=function () {
-            if(xhr.readyState==4 && xhr.status==200)
-            {
-
-            }
-        }
-    });
-    /**************************************************************/
-    //窗口提示
-    function messagePop(value) {
-        var str = '';
-        str += '<div class="pop" style="display:none"><div class="pop-val">' + value + '</div></div>';
-
-        $('body').append(str);
-        $('.pop').fadeIn(200);
-
-        $('.pop').css({
-            'position': 'fixed',
-            'width': '100px',
-            'top': '0',
-            'bottom': '0',
-            'z-index': '1000'
-        })
-        $('.pop-val').css({
-            'position': 'fixed',
-            'width': '300px',
-            'top': '40%',
-            'background': 'rgba(0,0,0,.5)',
-            'padding': '.2rem',
-            'text-align': 'center',
-            'left': '0',
-            'right': '0',
-            'margin-left': 'auto',
-            'margin-right': 'auto',
-            'border-radius': '5px',
-            'color': '#fff',
-            'font-size': '25px'
-        })
-
-        setTimeout(closeDiv2, 2000);
-        setTimeout(closeDiv3, 2300);
-        function closeDiv2() {
-            $('.pop').fadeOut(300);
-        };
-        function closeDiv3() {
-            $('.pop').remove();
-        };
-    }
-    /**************************************************************/
-</script>
+<script src="js/public_function.js"></script>
+<script src="js/detail.js"></script>
 </html>

@@ -13,7 +13,11 @@ import java.util.Map;
 public interface UserMapper {
     public customerInfo queryUserByName(String name);
 
+    public int signIn(String name,String pwd,String nickname);
+
     public List<merchandise> loadMerchandise();
+
+    public List<merchandise> searchMerchandise(String context);
 
     public int is_exist(Map map);
 

@@ -54,4 +54,12 @@ public class MerService {
         session.commit();
         return result;
     }
+    public List<merchandise> searchMerchandise(String context)
+    {
+        List<merchandise> list;
+        SqlSession session= GetSqlSession.createSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        list=userMapper.searchMerchandise(context);
+        return list;
+    }
 }

@@ -30,7 +30,7 @@
             <a href="javascript:;" class="arrow">中国大陆</a>
           </li>
           <li class="orange">
-            <a id="c_name" href="login.jsp">欢迎${customer.name}登录</a>
+            <a id="c_name" href="javascript:;">欢迎${customer.name}登录</a>
           </li>
           <li>
             <a href="sign_in.jsp">免费注册</a>
@@ -79,8 +79,8 @@
             <a href="javascript:;">店铺</a>
           </ul>
           <form class="search-input">
-            <input class="box1" type="text" name="search">
-            <button class="btn" type="submit">搜索</button>
+            <input class="box1" id="search" type="text" name="search">
+            <button class="btn" id="search_btn" type="button">搜索</button>
           </form>
 
           <div class="search-choose">
@@ -361,70 +361,6 @@
   </div>
   </body>
   <script src="./js/jquery.min.js"></script>
-  <script>
-    $(function () {
-      var doc = document.getElementById("content");
-      get_mer(doc);
-    });
-    function check_detail(ol)
-    {
-      var source = $(ol).find('img')[0].src;
-      var title = $(ol).find('p')[0].textContent;
-      var m_id = $(ol).find('span')[0].textContent;
-      var price = $(ol).find('span')[2].textContent;
-      window.location.href = "detail.jsp?title=" + title + "&price=" + price + "&source="+source+"&id="+m_id+"";
-    }
-    $("#load_cart").click(function (){
-      var name=$("#c_name").text().substring(2,$("#c_name").text().length-2);
-      var xhr=new XMLHttpRequest();
-      xhr.open("post","loadCart",false);
-      xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
-      xhr.send("name="+name);
-      xhr.onreadystatechange=function () {
-        if(xhr.readyState==4 && xhr.status==200)
-        {
-
-        }
-      }
-    });
-
-    function get_mer(doc)
-    {
-      $.ajax({
-        //请求方式
-        type : "POST",
-        //请求的媒体类型
-        contentType: "application/json;charset=UTF-8",
-        //请求地址
-        url : "MerServlet",
-        //数据，json字符串
-        data : JSON.stringify(""),
-        //请求成功
-        success : function(result) {
-         var res=JSON.parse(result);
-         var html="";
-          for(i=0;i<res.length;i++)
-          {
-              html+="<div class='item' onclick='check_detail(this)'>" +
-                      "<img src='"+res[i].dis_img_source+"'>" +
-                      "<span style='display: none'>"+res[i].id+"</span>"+
-                      "<p class='desc1'>"+res[i].m_dis+"</p>" +
-                      "<div>" +
-                      "<span style='font-size: 10px;color: orangered;'>￥</span>" +
-                      "<span id='price_dis' style='font-size: 20px;font-weight: bold; color: orangered;'>"+res[i].price+"</span>" +
-                      "<span id='purchased_num'>"+res[i].purchased_num+"</span>" +
-                      "<span>人购买</span>" +
-                      "</div>" +
-                      "</div>";
-            }
-            doc.innerHTML+=html;
-        },
-        //请求失败，包含具体的错误信息
-        error : function(e){
-          console.log(e.status);
-          console.log(e.responseText);
-        }
-      });
-    }
-  </script>
+  <script src="./js/public_function.js"></script>
+  <script src="./js/serch_merchandise.js"></script>
 </html>

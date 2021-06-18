@@ -50,4 +50,18 @@ public class UserService {
         session.commit();
         return result;
     }
+    public customerInfo sign_in(String name,String pwd,String nickname)
+    {
+        customerInfo customerInfo=new customerInfo();
+        SqlSession session= GetSqlSession.createSqlSession();
+        UserMapper userMapper=session.getMapper(UserMapper.class);
+       if(userMapper.signIn(name,pwd,nickname)>0)
+       {
+           customerInfo.setName(name);
+           customerInfo.setNickname(nickname);
+           customerInfo.setPwd(pwd);
+       }
+       session.commit();
+        return customerInfo;
+    }
 }

@@ -105,8 +105,11 @@
 .body-1 .search .search-box .search-input input{
     height: 39px;
     width: 554px;
-    border: 3px solid #ff5400;   
+    border: 3px solid #ff5400;
+    padding-left: 10px;
     outline: none;
+    font-size: 16px;
+    font-weight: bolder;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
