@@ -5,19 +5,33 @@
         <select id="queryUserByName" parameterType="String" resultType="com.taobao.bean.customerInfo">
     		select * from customer_info where name = #{userName}
         </select>
-        <select id="loadMerchandise"  resultType="com.taobao.bean.merchandise">
+        <select id="loadMerchandise"   resultType="com.taobao.bean.merchandise">
         select * from merchandise
         </select>
+        <select id="is_exist" parameterType="Map"  resultType="int">
+                select count(name) from shopping_cart where name=#{name} and mer_id=#{m_id}
+        </select>
+        <update id="change_Count" parameterType="Map">
+                update shopping_cart set count=count+#{m_count} where name=#{name} and mer_id=#{m_id}
+        </update>
+        <insert id="addCart"  parameterType="Map">
+                insert into shopping_cart values(#{name},#{m_id},#{m_count})
+        </insert>
+        <select id="load_Cart" parameterType="String"  resultType="com.taobao.bean.Cart">
+                select m.dis_img_source,m.id,m.m_dis,m.price,s.count
+                from shopping_cart s,merchandise m
+                where s.name=#{name} and s.mer_id=m.id
+        </select>
+        <delete id="cleanCart">
+                delete from shopping_cart where mer_id in
+                <foreach collection="array" open="(" close=")" item="item" separator="," >
+                         #{item}
+                </foreach>
+
+        </delete>
+<!--(select id from merchandise where m_dis='外贸原单法国纯亚麻水洗北欧纯色白色森林绿客厅卧室落地窗帘纱帘')-->
 
 
 
-    <!-- id: 对应Dao（Mapper）层接口方法名 parameterType：指定输入参数类型 -->
-    <!-- useGeneratedKeys="true"把新增加的主键赋值到自己定义的keyProperty（id）中 -->
-    <!--    <select id="queryUserByName" parameterType="String" resultType="com.taobao.bean">-->
-    <!--		select * from tb_user where userName = #{userName}-->
-    <!--    </select>-->
-    <!--    <select id="smenu" parameterType="Int" resultType="com.taobao.bean">-->
-    <!--        SELECT b.sFile,b.Link FROM mainmenu a, smenu b WHERE b.f_id=a.id AND b.f_id = #{id}-->
-    <!--    </select>-->
 
 </mapper>

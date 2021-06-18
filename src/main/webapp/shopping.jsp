@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: MrBun
@@ -18,7 +19,9 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./css/shopping.css">
     <link rel="stylesheet" href="./css/index.css">
+
 </head>
+
 
 <body>
 <div class="web-shop">
@@ -30,7 +33,7 @@
                     <a href="javascript:;" class="arrow">中国大陆</a>
                 </li>
                 <li class="orange">
-                    <a href="login.jsp">亲，请登录</a>
+                    <a id="c_name" href="login.jsp">欢迎${customer.name}登录</a>
                 </li>
                 <li>
                     <a href="sign_in.jsp">免费注册</a>
@@ -44,7 +47,7 @@
                     <a href="index.jsp" class="arrow">我的淘宝</a>
                 </li>
                 <li>
-                    <a href="shopping.jsp" class="arrow">购物车</a>
+                    <a href="shopping.jsp" id="load_cart" class="arrow">购物车</a>
                 </li>
                 <li>
                     <span class="start" class="arrow"></span>
@@ -116,109 +119,43 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tb_content">
+            <c:forEach items="${cart}" var="item">
+                <tr>
+                    <td>
+                        <input type='checkbox' name='c_check' class='c_check'>
+                        <label id="mer_id" style="display: none">${item.id}</label>
+                    </td>
+                    <td>
+                        <img src="${item.dis_img_source}" style="width: 70px;height: 70px;" alt="">
+                        <span>${item.m_dis}</span>
+                    </td>
+                    <td>
+                        <span>￥</span>
+                        <span>${item.price}</span>
+                    </td>
+                    <td>
+                        <div class="ticket" style="padding-top: 17px;">
+                            <p style="float: left; font-size: initial;">数量 </p>
+                            <form name="ticketNumber">
+                                <label>
+                                    <a href="javascript:; " onclick="aClick(this,'jian')">-</a>
+                                    <input class="amount-input" name="amount" type="text" value="${item.count}">
+                                    <a href="javascript:;" onclick="aClick(this,'jia')" style="float: none;">+</a>
+                                </label>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <span style="font-size: 20px;color: orangered;">￥</span>
+                        <span style="font-size: 20px;color: orangered;">15.00</span>
+                    </td>
+                    <td>
 
-        <tr>
-            <td>
-                <input type='checkbox' name='c_check' class='c_check'>
-            </td>
-            <td>
-                <img src="img/body1.jpg" style="width: 70px;height: 70px;" alt="">
-                <span>这是一只猫</span>
-            </td>
-            <td>
-                <span>￥</span>
-                <span>15.00</span>
-            </td>
-            <td>
-                <div class="ticket" style="padding-top: 17px;">
-                    <p style="float: left; font-size: initial;">数量 </p>
-                    <form name="ticketNumber">
-                        <label>
-                            <a href="javascript:; " onclick="aClick(this,'jian')">-</a>
-                            <input class="amount-input" name="amount" type="text" value="1">
-                            <a href="javascript:;" onclick="aClick(this,'jia')" style="float: none;">+</a>
-                        </label>
-                    </form>
-                </div>
-            </td>
-            <td>
-                <span style="font-size: 20px;color: orangered;">￥</span>
-                <span style="font-size: 20px;color: orangered;">15.00</span>
-            </td>
-            <td>
-
-                <a style="cursor: pointer;" id="remove">删除</a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <input type='checkbox' name='c_check' class='c_check'>
-            </td>
-            <td>
-                <img src="img/body1.jpg" style="width: 70px;height: 70px;" alt="">
-                <span>这是一只猫</span>
-            </td>
-            <td>
-                <span>￥</span>
-                <span>15.00</span>
-            </td>
-            <td>
-                <div class="ticket" style="padding-top: 17px;">
-                    <p style="float: left; font-size: initial;">数量 </p>
-                    <form name="ticketNumber">
-                        <label>
-                            <a href="javascript:; " onclick="aClick(this,'jian')">-</a>
-                            <input class="amount-input" name="amount" type="text" value="1">
-                            <a href="javascript:;" onclick="aClick(this,'jia')" style="float: none;">+</a>
-                        </label>
-                    </form>
-                </div>
-            </td>
-            <td>
-                <span style="font-size: 20px;color: orangered;">￥</span>
-                <span style="font-size: 20px;color: orangered;">15.00</span>
-            </td>
-            <td>
-
-                <a style="cursor: pointer;" id="remove">删除</a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <input type='checkbox' name='c_check' class='c_check'>
-            </td>
-            <td>
-                <img src="img/body1.jpg" style="width: 70px;height: 70px;" alt="">
-                <span>这是一只猫</span>
-            </td>
-            <td>
-                <span>￥</span>
-                <span>15.00</span>
-            </td>
-            <td>
-                <div class="ticket" style="padding-top: 17px;">
-                    <p style="float: left; font-size: initial;">数量 </p>
-                    <form name="ticketNumber">
-                        <label>
-                            <a href="javascript:; " onclick="aClick(this,'jian')">-</a>
-                            <input class="amount-input" name="amount" type="text" value="1">
-                            <a href="javascript:;" onclick="aClick(this,'jia')" style="float: none;">+</a>
-                        </label>
-                    </form>
-                </div>
-            </td>
-            <td>
-                <span style="font-size: 20px;color: orangered;">￥</span>
-                <span style="font-size: 20px;color: orangered;">15.00</span>
-            </td>
-            <td>
-
-                <a style="cursor: pointer;" id="remove">删除</a>
-            </td>
-        </tr>
+                        <a style="cursor: pointer;" id="remove">删除</a>
+                    </td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
 
@@ -276,8 +213,32 @@
 <script>
     var num_count = Number(0);
     var num_price = Number($("#total_price").text());
+    var list="";
     $(function () {
         registerClick();
+        init();
+    });
+    function init()
+    {
+       var count= $("#tb_content").children("tr").length;
+       for(let i=0; i<count; i++)
+       {
+           var context = $("#tb_content").find('tr').eq(i).find('input').eq(0);
+           fix(context);
+       }
+    }
+    $("#load_cart").click(function (){
+        var name=$("#c_name").text().substring(2,$("#c_name").text().length-2);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","loadCart",false);
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.send("name="+name);
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4 && xhr.status==200)
+            {
+
+            }
+        }
     });
     /**************************************************************/
     //单个商品价格计算函数
@@ -306,7 +267,10 @@
     function deleteRow(t) {
         if (confirm("是否删除行?")) {
             var tr = $(t).parent().parent();
+            list=$("#mer_id").text();
+            remove(list);
             $(tr).remove();
+
         }
         calculate_total_price($(".c_check"));
     }
@@ -334,9 +298,11 @@
         $('input[name="c_check"]:checked').each(function () {
             if ($(this).val() == "on") {
                 var tr = $(this).parent().parent();
+                list+=$(tr).find("label").eq(0).text()+",";
                 $(tr).remove();
             }
         });
+        remove(list);
     }
     /**************************************************************/
     /**************************************************************/
@@ -378,5 +344,21 @@
         fix(check_p);
     }
     /**************************************************************/
+    function remove(val)
+    {
+
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","removeMerchandise");
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded;charset=utf-8");
+        xhr.send("id="+val);
+
+        // contentType: 'text/json,charset=utf-8'
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4 && xhr.status==200)
+            {
+                list="";
+            }
+        }
+    }
 </script>
 </html>

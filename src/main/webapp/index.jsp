@@ -44,7 +44,7 @@
             <a href="index.jsp" class="arrow">我的淘宝</a>
           </li>
           <li>
-            <a href="shopping.jsp" class="arrow">购物车</a>-
+            <a href="shopping.jsp" id="load_cart" class="arrow">购物车</a>-
           </li>
           <li>
             <span class="start" class="arrow"></span>
@@ -370,9 +370,23 @@
     {
       var source = $(ol).find('img')[0].src;
       var title = $(ol).find('p')[0].textContent;
-      var price = $(ol).find('span')[1].textContent;
-      window.location.href = "detail.jsp?title=" + title + "&price=" + price + "&source="+source+"";
+      var m_id = $(ol).find('span')[0].textContent;
+      var price = $(ol).find('span')[2].textContent;
+      window.location.href = "detail.jsp?title=" + title + "&price=" + price + "&source="+source+"&id="+m_id+"";
     }
+    $("#load_cart").click(function (){
+      var name=$("#c_name").text().substring(2,$("#c_name").text().length-2);
+      var xhr=new XMLHttpRequest();
+      xhr.open("post","loadCart",false);
+      xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+      xhr.send("name="+name);
+      xhr.onreadystatechange=function () {
+        if(xhr.readyState==4 && xhr.status==200)
+        {
+
+        }
+      }
+    });
 
     function get_mer(doc)
     {
@@ -393,6 +407,7 @@
           {
               html+="<div class='item' onclick='check_detail(this)'>" +
                       "<img src='"+res[i].dis_img_source+"'>" +
+                      "<span style='display: none'>"+res[i].id+"</span>"+
                       "<p class='desc1'>"+res[i].m_dis+"</p>" +
                       "<div>" +
                       "<span style='font-size: 10px;color: orangered;'>￥</span>" +

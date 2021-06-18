@@ -27,7 +27,7 @@
                     <a href="javascript:;" class="arrow">中国大陆</a>
                 </li>
                 <li class="orange">
-                    <a href="login.jsp">亲，请登录</a>
+                    <a href="login.jsp" id="cus_name">欢迎${customer.name}登录</a>
                 </li>
                 <li>
                     <a href="sign_in.jsp">免费注册</a>
@@ -41,7 +41,7 @@
                     <a href="index.jsp" class="arrow">我的淘宝</a>
                 </li>
                 <li>
-                    <a href="shopping.jsp" class="arrow">购物车</a>
+                    <a href="shopping.jsp" id="load_cart" class="arrow">购物车</a>
                 </li>
                 <li>
                     <span class="start" class="arrow"></span>
@@ -119,7 +119,7 @@
                         <form name="ticketNumber">
                             <label>
                                 <a href="javascript:calculateUpdate('jian')">-</a>
-                                <input class="amount-input" name="amount" type="text" value="1">
+                                <input class="amount-input" id="mer_count" name="amount" type="text" value="1">
                                 <a href="javascript:calculateUpdate('jia')" style="float: none;">+</a>
                             </label>
                         </form>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="dis dis-4">
                     <input class="btn-buy" type="button" value="立即购买">
-                    <input class="btn-add" type="button" value="加入购物车">
+                    <input class="btn-add"  type="button" value="加入购物车">
                 </div>
             </div>
 
@@ -177,15 +177,31 @@
 </body>
 <script src="js/jquery.min.js"></script>
 <script>
+    var m_id;
+    var name;
+    var m_count;
     $(function () {
         var url = decodeURI(location.href);
         var val = parseURL(url);
         $("#img_src").attr("src",val.source);
         $("#commodity_dis").text(val.title);
         $("#price_dis").text(val.price);
+        m_id=val.id;
+        name=$("#cus_name").text().substring(2,$("#cus_name").text().length-2);
+
     });
     $(".btn-add").click(function () {
-        messagePop("加入购物车成功");
+        m_count=$("#mer_count").val();
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","addCart");
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.send("name="+name+"&m_id="+m_id+"&m_count="+m_count);
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4 && xhr.status==200)
+            {
+                messagePop("加入购物车成功");
+            }
+        }
     });
 
     /********************************************************/
@@ -217,6 +233,19 @@
 
         return res;
     }
+    $("#load_cart").click(function (){
+        var name=$("#cus_name").text().substring(2,$("#cus_name").text().length-2);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","loadCart",false);
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.send("name="+name);
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4 && xhr.status==200)
+            {
+
+            }
+        }
+    });
     /**************************************************************/
     //窗口提示
     function messagePop(value) {
