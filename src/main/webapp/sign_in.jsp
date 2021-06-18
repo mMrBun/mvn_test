@@ -22,7 +22,7 @@
 
     </div>
 </div>
-<div class="content">
+<%--<div class="content">
     <div class="login_box">
         <div class="login_info">
             <label for="">手机号码</label>
@@ -56,7 +56,36 @@
         </div>
     </div>
 
+</div>--%>
+<div class="content">
+    <div class="login_box">
+        <div class="login_name">
+            <label for="name">账号：</label>
+            <input class="input" type="text" name="name" id="name" value="" />
+        </div>
+        <div class="login_pwd">
+            <label for="pawd">密码：</label>
+            <input class="input" type="password" name="pawd" id="pawd" value="" />
+        </div>
+        <div class="login_nickName">
+            <label for="nickName">昵称：</label>
+            <input class="input" type="text" name="nickName" id="nickName" value="" />
+        </div>
+        <div class="login_submit">
+            <input id="btn_signin" type="button" value="注册">
+        </div>
+        <div class="login_problem">
+            <input type="checkbox" name="" id="">
+            <span>
+						已阅读并同意以下协议淘宝平台服务协议、隐私权政策、
+					</span>
+            <p>
+                法律声明支付宝及客户端服务协议
+            </p>
+        </div>
+    </div>
 </div>
+
 <div class="footer">
     <div class="footer-hd">
         <p data-spm-anchor-id="a2107.1.0.i4.742511d9dVgDBN">
@@ -102,9 +131,10 @@
                                                                   rel="noopener noreferrer">营销中心</a></span><span><a
                 href="http://jubao.alibaba.com/internet/readme.htm?site=taobao"
                 rel="noopener noreferrer">廉正举报</a></span><span><a href="https://consumerservice.taobao.com/"
-                                                                  rel="noopener noreferrer">联系客服</a></span><span><a href="http://open.taobao.com"
-                                                                                                                    rel="noopener noreferrer">开放平台</a></span><span><a href="http://www.taobao.com/about/join.php"
-                                                                                                                                                                      rel="noopener noreferrer">诚征英才</a></span><span><a
+                                                                  rel="noopener noreferrer">联系客服</a></span><span><a
+                href="http://open.taobao.com"
+                rel="noopener noreferrer">开放平台</a></span><span><a href="http://www.taobao.com/about/join.php"
+                                                                  rel="noopener noreferrer">诚征英才</a></span><span><a
                 href="http://consumerservice.taobao.com/contact-us"
                 rel="noopener noreferrer">联系我们</a></span><span><a
                 href="https://www.taobao.com/tbhome/page/sitemap"
@@ -138,13 +168,13 @@
         if ($("#tel").val() == "") {
             alert("请输入手机号");
             return;
-        }
-        else if (!pattern.test($("#tel").val())) {
+        } else if (!pattern.test($("#tel").val())) {
             alert("手机格式不正确");
             return;
         }
         return true;
     }
+
     /**************************************************************/
     /**************************************************************/
     //判断当前注册的用户是否已经存在，如果存在注册失败，如果不存在调用FileSaver.js脚本进行账户的存储
@@ -169,7 +199,7 @@
                         name: $("#tel").val(),
                     }
                     var content = JSON.stringify(data);
-                    var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+                    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
                     saveAs(blob, "save.json");
                     window.location.href = "index.jsp";
                 }
