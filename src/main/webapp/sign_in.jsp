@@ -27,9 +27,9 @@
     <form action="signIn" id="sign_in" method="post">
         <div class="login_box">
             <div class="login_name">
-                <label for="name">手机号:</label>
-                <input class="input" type="text" name="name" id="name" value="" /></br>
-                <span style="color: red">${messageModel.msg}</span>
+                <label for="in_name">手机号:</label>
+                <input class="input" type="text" name="name" id="in_name" value="" /></br>
+                <span >${messageModel.msg}</span>
             </div>
             <div class="login_pwd">
                 <label for="pawd">密码：</label>
@@ -43,7 +43,7 @@
                 <input id="btn_signin" type="button" value="注册">
             </div>
             <div class="login_problem">
-                <input type="checkbox" name="" id="">
+                <input type="checkbox" name="" id="agree">
                 <span>
 						已阅读并同意以下协议淘宝平台服务协议、隐私权政策、
 					</span>

@@ -64,4 +64,10 @@ public class UserService {
        session.commit();
         return customerInfo;
     }
+    public int check_name(String name)
+    {
+        SqlSession session= GetSqlSession.createSqlSession();
+        UserMapper userMapper=session.getMapper(UserMapper.class);
+        return userMapper.check_name(name);
+    }
 }

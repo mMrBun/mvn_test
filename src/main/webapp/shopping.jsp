@@ -68,43 +68,45 @@
             </ul>
         </div>
     </div>
+    <div class="tag">
 
-    <div class="body-1">
-        <!-- 搜索框 -->
-        <div class="search">
-            <div class="search-logo">
-                <img src="" alt="">
-            </div>
-            <div class="search-box">
-                <ul class="search-tab">
-                    <a href="javascript:;" class="choose1">淘宝</a>
-                    <a href="javascript:;">天猫</a>
-                    <a href="javascript:;">店铺</a>
-                </ul>
-                <form class="search-input">
-                    <input class="box1" id="search" type="text" name="search">
-                    <button class="btn" id="search_btn" type="button">搜索</button>
-                </form>
-                <div class="search-choose">
-                    <a href="javascript:;">新款连衣裙</a>
-                    <a href="javascript:;">四件套</a>
-                    <a href="javascript:;">潮流T恤</a>
-                    <a href="javascript:;">时尚女鞋</a>
-                    <a href="javascript:;">短裤</a>
-                    <a href="javascript:;">半身裙</a>
-                    <a href="javascript:;">男士外套</a>
-                    <a href="javascript:;">墙纸</a>
-                    <a href="javascript:;">新款男鞋</a>
-                    <a href="javascript:;">耳机</a>
-                </div>
-            </div>
-            <div class="search-code">
-                <a href="javascript:;">
-                    <img src="img/downloda.jpg" alt="">
-                </a>
-            </div>
-        </div>
     </div>
+<%--    <div class="body-1">--%>
+<%--        <!-- 搜索框 -->--%>
+<%--        <div class="search">--%>
+<%--            <div class="search-logo">--%>
+<%--                <img src="" alt="">--%>
+<%--            </div>--%>
+<%--            <div class="search-box">--%>
+<%--                <ul class="search-tab">--%>
+<%--                    <a href="javascript:;" class="choose1">淘宝</a>--%>
+<%--                    <a href="javascript:;">天猫</a>--%>
+<%--                    <a href="javascript:;">店铺</a>--%>
+<%--                </ul>--%>
+<%--                <form class="search-input">--%>
+<%--                    <input class="box1" id="search" type="text" name="search">--%>
+<%--                    <button class="btn" id="search_btn" type="button">搜索</button>--%>
+<%--                </form>--%>
+<%--                <div class="search-choose">--%>
+<%--                    <a href="javascript:;">新款连衣裙</a>--%>
+<%--                    <a href="javascript:;">四件套</a>--%>
+<%--                    <a href="javascript:;">潮流T恤</a>--%>
+<%--                    <a href="javascript:;">时尚女鞋</a>--%>
+<%--                    <a href="javascript:;">短裤</a>--%>
+<%--                    <a href="javascript:;">半身裙</a>--%>
+<%--                    <a href="javascript:;">男士外套</a>--%>
+<%--                    <a href="javascript:;">墙纸</a>--%>
+<%--                    <a href="javascript:;">新款男鞋</a>--%>
+<%--                    <a href="javascript:;">耳机</a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="search-code">--%>
+<%--                <a href="javascript:;">--%>
+<%--                    <img src="img/downloda.jpg" alt="">--%>
+<%--                </a>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 </div>
 <div class="content">
     <table id="test">

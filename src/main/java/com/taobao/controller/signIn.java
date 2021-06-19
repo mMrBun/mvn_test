@@ -17,21 +17,22 @@ public class signIn extends HttpServlet {
         String name=request.getParameter("name");
         String pwd=request.getParameter("pawd");
         String nickName=request.getParameter("nickName");
-        MessageModel messageModel=userService.userLogin(name,pwd);
-        if (messageModel.getCode() == 1 ) {
-           messageModel.setMsg("用户已存在");
-            request.setAttribute("messageModel",messageModel);
-            request.getRequestDispatcher("sign_in.jsp").forward(request,response);
+//        MessageModel messageModel=userService.userLogin(name,pwd);
+        customerInfo customerInfo=new customerInfo();
+        customerInfo=userService.sign_in(name,pwd,nickName);
+        if (customerInfo!=null) {
+            request.getSession().setAttribute("customer",customerInfo);
+            response.sendRedirect("index.jsp");
         } else {
-            customerInfo customerInfo=new customerInfo();
-            customerInfo=userService.sign_in(name,pwd,nickName);
-            if (customerInfo!=null) {
-                request.getSession().setAttribute("customer",customerInfo);
-                response.sendRedirect("index.jsp");
-            } else {
-                request.getRequestDispatcher("sign_in.jsp").forward(request,response);
-            }
+            request.getRequestDispatcher("sign_in.jsp").forward(request,response);
         }
+//        if (messageModel.getCode() == 1 ) {
+//           messageModel.setMsg("用户已存在");
+//            request.setAttribute("messageModel",messageModel);
+//            request.getRequestDispatcher("sign_in.jsp").forward(request,response);
+//        } else {
+//
+//        }
 
 
 

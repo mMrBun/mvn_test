@@ -46,6 +46,12 @@
                 from merchandise
                 where m_dis like "%"#{context}"%"
         </select>
+
+        <select id="check_name" parameterType="String"  resultType="int">
+                select count(name)
+                from customer_info
+                where name=#{name}
+        </select>
 <!--(select id from merchandise where m_dis='外贸原单法国纯亚麻水洗北欧纯色白色森林绿客厅卧室落地窗帘纱帘')-->
 
 

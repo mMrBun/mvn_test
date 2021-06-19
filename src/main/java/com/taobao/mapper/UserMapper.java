@@ -29,5 +29,7 @@ public interface UserMapper {
 
     public int cleanCart(Integer[]buffer);
 
+    public int check_name(String name);
+
 }
 
