@@ -23,7 +23,7 @@ function check_login()
     var content=$("#c_name").text().length;
     if(content<=4)
     {
-        window.location.href="http://localhost:8080/shopping/login.jsp";
+        window.location.href="login.jsp";
         return false;
     }
     else{
